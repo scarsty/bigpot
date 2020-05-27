@@ -37,7 +37,7 @@ BP_Texture* Engine::createTexture(int pix_fmt, int w, int h)
 {
     if (pix_fmt == SDL_PIXELFORMAT_UNKNOWN)
     {
-        pix_fmt = SDL_PIXELFORMAT_ARGB8888;
+        pix_fmt = SDL_PIXELFORMAT_RGB24;
     }
     return SDL_CreateTexture(renderer_, pix_fmt, SDL_TEXTUREACCESS_STREAMING, w, h);
 }

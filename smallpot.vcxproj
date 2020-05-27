@@ -124,20 +124,20 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);$(VCPKG_LIB_PATH)\x64-windows-static\include;$(USR_LOCAL)\include;common</AdditionalIncludeDirectories>
-      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);$(VCPKG_LIB_PATH)\x64-windows\include;$(USR_LOCAL)\include;../common;C:\dat\project\淆习相关\realsr-ncnn-vulkan\src;C:\dat\project\淆习相关\realsr-ncnn-vulkan\src\ncnn\src;C:\dat\project\淆习相关\realsr-ncnn-vulkan\src\build\ncnn\src;C:\VulkanSDK\1.2.135.0\include</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <SDLCheck>false</SDLCheck>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>sdl2.lib;sdl2_ttf.lib;sdl2_image.lib;sdl2main.lib;ass.lib;libiconv.lib;avutil.lib;avcodec.lib;avformat.lib;swresample.lib;swscale.lib;fribidi.lib;harfbuzz.lib;freetype.lib;bz2.lib;libpng16.lib;zlib.lib;libcharset.lib;winmm.lib;version.lib;imm32.lib;bcrypt.lib;secur32.lib;ws2_32.Lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>sdl2.lib;sdl2_ttf.lib;sdl2_image.lib;sdl2main.lib;ass.lib;libiconv.lib;avutil.lib;avcodec.lib;avformat.lib;swresample.lib;swscale.lib;fribidi.lib;harfbuzz.lib;freetype.lib;bz2.lib;libpng16.lib;zlib.lib;libcharset.lib;winmm.lib;version.lib;imm32.lib;bcrypt.lib;secur32.lib;ws2_32.Lib;realsr-ncnn-vulkand.lib;C:\dat\project\淆习相关\realsr-ncnn-vulkan\src\build\ncnn\src\Debug\ncnn.lib;C:\VulkanSDK\1.2.135.0\lib\vulkan-1.lib;Shell32.lib</AdditionalDependencies>
       <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
       <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
       <IgnoreSpecificDefaultLibraries>
       </IgnoreSpecificDefaultLibraries>
-      <AdditionalLibraryDirectories>$(VCPKG_LIB_PATH)\x64-windows-static\lib;$(VCPKG_LIB_PATH)\x64-windows-static\lib\manual-link;lib/x64</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(VCPKG_LIB_PATH)\x64-windows\lib;$(VCPKG_LIB_PATH)\x64-windows\lib\manual-link;lib/x64;C:\dat\project\淆习相关\realsr-ncnn-vulkan\src\build\Debug</AdditionalLibraryDirectories>
       <GenerateMapFile>true</GenerateMapFile>
     </Link>
     <ProjectReference>
@@ -181,7 +181,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);$(VCPKG_LIB_PATH)\x64-windows\include;$(USR_LOCAL)\include;common</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);$(VCPKG_LIB_PATH)\x64-windows\include;$(USR_LOCAL)\include;../common;C:\dat\project\淆习相关\realsr-ncnn-vulkan\src;C:\dat\project\淆习相关\realsr-ncnn-vulkan\src\ncnn\src;C:\dat\project\淆习相关\realsr-ncnn-vulkan\src\build\ncnn\src;C:\VulkanSDK\1.2.135.0\include</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
     </ClCompile>
@@ -204,8 +204,8 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="common\File.cpp" />
-    <ClCompile Include="common\convert.cpp" />
+    <ClCompile Include="..\common\File.cpp" />
+    <ClCompile Include="..\common\convert.cpp" />
     <ClCompile Include="src\Font.cpp" />
     <ClCompile Include="src\others\sha3.cpp" />
     <ClCompile Include="src\others\text_encoding_detect.cpp" />

@@ -7,8 +7,7 @@
     <LocalDebuggerWorkingDirectory>$(SolutionDir)\work</LocalDebuggerWorkingDirectory>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <LocalDebuggerCommandArguments>
-    </LocalDebuggerCommandArguments>
+    <LocalDebuggerCommandArguments>D:\_sty_bak\sty\media\贞观之治\贞观之治EP01.mkv</LocalDebuggerCommandArguments>
     <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
     <LocalDebuggerWorkingDirectory>$(SolutionDir)\smallpot-x64</LocalDebuggerWorkingDirectory>
   </PropertyGroup>
@@ -19,8 +18,7 @@
     <LocalDebuggerWorkingDirectory>$(SolutionDir)\work</LocalDebuggerWorkingDirectory>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <LocalDebuggerCommandArguments>
-    </LocalDebuggerCommandArguments>
+    <LocalDebuggerCommandArguments>D:\_sty_bak\sty\media\贞观之治\贞观之治EP01.mkv</LocalDebuggerCommandArguments>
     <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
     <LocalDebuggerWorkingDirectory>$(SolutionDir)\smallpot-x64</LocalDebuggerWorkingDirectory>
   </PropertyGroup>

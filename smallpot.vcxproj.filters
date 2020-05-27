@@ -72,9 +72,6 @@
     <ClCompile Include="src\PotStreamSubtitle.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="common\File.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\Font.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -87,7 +84,10 @@
     <ClCompile Include="src\others\tinyxml2.cpp">
       <Filter>others</Filter>
     </ClCompile>
-    <ClCompile Include="common\convert.cpp">
+    <ClCompile Include="..\common\File.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\common\convert.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

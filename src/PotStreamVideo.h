@@ -6,6 +6,8 @@ extern "C"
 #include "libswscale/swscale.h"
 }
 
+class RealSR;
+
 class PotStreamVideo : public PotStream
 {
 public:
@@ -33,4 +35,5 @@ public:
 private:
     int texture_pix_fmt_;
     SwsContext* img_convert_ctx_ = nullptr;
+    RealSR* realsr = nullptr;
 };
