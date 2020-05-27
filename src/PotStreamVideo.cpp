@@ -11,7 +11,7 @@ PotStreamVideo::PotStreamVideo()
     realsr = new RealSR(0, 0);
     realsr->load(L"x4.param", L"x4.bin");
     realsr->scale = 4;
-    realsr->tilesize = 200;
+    realsr->tilesize = 1000;
     realsr->prepadding = 10;
 }
 
@@ -104,21 +104,21 @@ FrameContent PotStreamVideo::convertFrameToContent()
     switch (texture_pix_fmt_)
     {
     case SDL_PIXELFORMAT_UNKNOWN:
-        img_convert_ctx_ = sws_getCachedContext(img_convert_ctx_, f->width, f->height, AVPixelFormat(f->format), f->width, f->height, AV_PIX_FMT_BGR24, SWS_FAST_BILINEAR, NULL, NULL, NULL);
+        img_convert_ctx_ = sws_getCachedContext(img_convert_ctx_, f->width, f->height, AVPixelFormat(f->format), f->width/2, f->height/2, AV_PIX_FMT_RGB24, SWS_FAST_BILINEAR, NULL, NULL, NULL);
         if (img_convert_ctx_)
         {
             uint8_t* pixels[4];
             int pitch[4];
 
 
-            ncnn::Mat m(f->width, f->height, 3);
+            ncnn::Mat m(f->width/2, f->height/2, 3u, 3);
             pixels[0] = (uint8_t*)m.data;
-            pitch[0] = f->width * 4;
+            pitch[0] = f->width/2 * 3;
 
             sws_scale(img_convert_ctx_, (const uint8_t* const*)f->data, f->linesize, 0, f->height, pixels, pitch);
 
 
-            ncnn::Mat m1(4*f->width, 4*f->height, 3);
+            ncnn::Mat m1(2*f->width, 2*f->height, 3u, 3);
             realsr->process(m, m1);
             pitch[0] *= 4;
             engine_->updateARGBTexture(tex, (uint8_t*)m1.data, pitch[0]);

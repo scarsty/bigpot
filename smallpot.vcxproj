@@ -182,7 +182,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);$(VCPKG_LIB_PATH)\x64-windows\include;$(USR_LOCAL)\include;../common;C:\dat\project\淆习相关\realsr-ncnn-vulkan\src;C:\dat\project\淆习相关\realsr-ncnn-vulkan\src\ncnn\src;C:\dat\project\淆习相关\realsr-ncnn-vulkan\src\build\ncnn\src;C:\VulkanSDK\1.2.135.0\include</AdditionalIncludeDirectories>
-      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
     </ClCompile>
     <Link>
@@ -196,7 +196,7 @@
       <DelayLoadDLLs>
       </DelayLoadDLLs>
       <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
-      <AdditionalDependencies>sdl2.lib;sdl2_ttf.lib;sdl2_image.lib;sdl2main.lib;ass.lib;libiconv.lib;avutil.lib;avcodec.lib;avformat.lib;swresample.lib;swscale.lib;fribidi.lib;harfbuzz.lib;freetype.lib;bz2.lib;libpng16.lib;zlib.lib;libcharset.lib;winmm.lib;version.lib;imm32.lib;bcrypt.lib;secur32.lib;ws2_32.Lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>sdl2.lib;sdl2_ttf.lib;sdl2_image.lib;sdl2main.lib;ass.lib;libiconv.lib;avutil.lib;avcodec.lib;avformat.lib;swresample.lib;swscale.lib;fribidi.lib;harfbuzz.lib;freetype.lib;bz2.lib;libpng16.lib;zlib.lib;libcharset.lib;winmm.lib;version.lib;imm32.lib;bcrypt.lib;secur32.lib;ws2_32.Lib;C:\dat\project\淆习相关\realsr-ncnn-vulkan\src\build\Release\realsr-ncnn-vulkan.lib;C:\dat\project\淆习相关\realsr-ncnn-vulkan\src\build\ncnn\src\Release\ncnn.lib;C:\VulkanSDK\1.2.135.0\lib\vulkan-1.lib;Shell32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(VCPKG_LIB_PATH)\x64-windows\lib;$(VCPKG_LIB_PATH)\x64-windows\lib\manual-link;lib/x64</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
