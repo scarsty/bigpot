@@ -554,7 +554,7 @@ void PotPlayer::openMedia(const std::string& filename)
     media_ = new PotMedia;
 #ifndef _WINDLL
     //某些格式的媒体是分开为很多个文件，这类文件最好先切换工作目录
-    File::changePath(File::getFilePath(filename));
+    //File::changePath(File::getFilePath(filename));
 #endif
     //通过参数传入的字串被SDL转为utf-8
     //打开文件, 需要进行转换

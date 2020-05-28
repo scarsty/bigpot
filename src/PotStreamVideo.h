@@ -7,6 +7,7 @@ extern "C"
 }
 
 class RealSR;
+class Waifu2x;
 
 class PotStreamVideo : public PotStream
 {
@@ -36,4 +37,5 @@ private:
     int texture_pix_fmt_;
     SwsContext* img_convert_ctx_ = nullptr;
     RealSR* realsr = nullptr;
+    Waifu2x* waifu2x = nullptr;
 };

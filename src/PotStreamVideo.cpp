@@ -1,6 +1,11 @@
 #include "PotStreamVideo.h"
+#include "Config.h"
 
+#include "File.h"
+#include "PotConv.h"
+#include "convert.h"
 #include "realsr.h"
+#include "waifu2x.h"
 #include <string>
 
 PotStreamVideo::PotStreamVideo()
@@ -8,11 +13,43 @@ PotStreamVideo::PotStreamVideo()
     //视频缓冲区, 足够大时会较流畅，但是跳帧会闪烁
     type_ = BPMEDIA_TYPE_VIDEO;
     ncnn::create_gpu_instance();
-    realsr = new RealSR(0, 0);
-    realsr->load(L"x4.param", L"x4.bin");
-    realsr->scale = 4;
-    realsr->tilesize = 1000;
-    realsr->prepadding = 10;
+    //realsr = new RealSR(0, 0);
+    //realsr->load(L"x4.param", L"x4.bin");
+    //realsr->scale = 4;
+    //realsr->tilesize = 100;
+    //realsr->prepadding = 10;
+
+    auto model = Config::getInstance()->getString("model");
+    auto bin = Config::getInstance()->getString("bin");
+
+    std::wstring modelw(model.begin(), model.end());
+    std::wstring binw(bin.begin(), bin.end());
+
+    if (!model.empty())
+    {
+        waifu2x = new Waifu2x(0, 0);
+        waifu2x->load(modelw, binw);
+        waifu2x->noise = atoi(convert::findANumber(File::getFileMainname(model)).c_str());
+        waifu2x->scale = 2;
+        waifu2x->tilesize = 200;
+        waifu2x->prepadding = 7;
+
+        if (model.find("models-cunet") != model.npos)
+        {
+            if (waifu2x->noise == -1)
+            {
+                waifu2x->prepadding = 18;
+            }
+            else if (waifu2x->scale == 1)
+            {
+                waifu2x->prepadding = 28;
+            }
+            else if (waifu2x->scale == 2)
+            {
+                waifu2x->prepadding = 18;
+            }
+        }
+    }
 }
 
 PotStreamVideo::~PotStreamVideo()
@@ -21,7 +58,7 @@ PotStreamVideo::~PotStreamVideo()
     {
         sws_freeContext(img_convert_ctx_);
     }
-    delete realsr;
+    //delete realsr;
 }
 
 //-1无视频
@@ -101,28 +138,32 @@ FrameContent PotStreamVideo::convertFrameToContent()
 {
     auto& f = frame_;
     auto tex = nullptr;
+    int scale = 1;
+    if (waifu2x)
+    {
+        scale = 1;
+    }
     switch (texture_pix_fmt_)
     {
     case SDL_PIXELFORMAT_UNKNOWN:
-        img_convert_ctx_ = sws_getCachedContext(img_convert_ctx_, f->width, f->height, AVPixelFormat(f->format), f->width/2, f->height/2, AV_PIX_FMT_RGB24, SWS_FAST_BILINEAR, NULL, NULL, NULL);
+        img_convert_ctx_ = sws_getCachedContext(img_convert_ctx_, f->width, f->height, AVPixelFormat(f->format), f->width / scale, f->height / scale, AV_PIX_FMT_RGB24, SWS_FAST_BILINEAR, NULL, NULL, NULL);
         if (img_convert_ctx_)
         {
             uint8_t* pixels[4];
             int pitch[4];
 
-
-            ncnn::Mat m(f->width/2, f->height/2, 3u, 3);
+            ncnn::Mat m(f->width / scale, f->height / scale, 3u, 3);
+            ncnn::Mat m1(f->width*2/scale, f->height*2/scale, 3u, 3);
             pixels[0] = (uint8_t*)m.data;
-            pitch[0] = f->width/2 * 3;
-
+            pitch[0] = f->width / scale * 3;
             sws_scale(img_convert_ctx_, (const uint8_t* const*)f->data, f->linesize, 0, f->height, pixels, pitch);
-
-
-            ncnn::Mat m1(2*f->width, 2*f->height, 3u, 3);
-            realsr->process(m, m1);
-            pitch[0] *= 4;
-            engine_->updateARGBTexture(tex, (uint8_t*)m1.data, pitch[0]);
-
+            if (waifu2x)
+            {
+                waifu2x->process(m, m1);
+                pixels[0] = (uint8_t*)m1.data;
+            }
+            pitch[0] *= 2/scale;
+            engine_->updateARGBTexture(tex, pixels[0], pitch[0]);
 
             //if (!engine_->lockTexture(tex, nullptr, (void**)pixels, pitch))
             //{
